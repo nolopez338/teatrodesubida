@@ -12,6 +12,54 @@
 @media(min-width:761px) and (max-width:1100px){.contenedor{width:calc(100% - 48px)}.dias-semana span{padding:12px 6px;font-size:.875rem}.dia{padding:12px 7px}.mes-extra{font-size:.875rem}.material{padding:22px}.portada:after{opacity:.5}}
 @media(max-width:760px){.contenedor{width:calc(100% - 36px)}.cabecera .contenedor{min-height:85px;flex-wrap:wrap;padding-block:20px;gap:15px}.marca{font-size:1.4rem}nav{gap:22px}nav a{font-size:.9rem}.portada{padding:40px 0}.portada:after{right:-55px;top:22px;opacity:.5}h1{max-width:520px}.subtitulo{font-size:1rem}.sobretitulo{font-size:.75rem}section{padding-top:36px}.calendario-intro{grid-template-columns:1fr;gap:24px;margin-bottom:24px}.muestra-tarjeta{padding:18px 20px}.muestra-tarjeta strong{font-size:1.5rem}.barra{margin-bottom:18px}.leyenda{gap:10px 18px}.vistas{display:none}.dias-semana{display:none}.calendario{display:block;border:0}.vacio{display:none}.dia{display:grid;grid-template-columns:94px minmax(0,1fr);gap:16px;min-height:0;padding:18px 16px;border:1px solid var(--borde);margin-bottom:8px;border-radius:4px}.dia time{display:block;margin:0}.fecha-numero{display:block;font-size:1.8rem;margin-bottom:6px}.fecha-contexto{display:block;font-size:.875rem;line-height:1.4}.mes-agenda{display:block}.mes-extra{display:none}.detalle p,.estado{font-size:.9375rem}.dia.adicional{border-top:3px solid var(--vino)}.nota{font-size:.875rem}.materiales{padding-top:42px;padding-bottom:40px}.materiales-grid{grid-template-columns:1fr;gap:16px}.material{padding:24px}.material.transversal{display:block;grid-column:auto}.transversal h3{margin-bottom:18px}.material li{font-size:1rem}footer .contenedor{display:block}footer p+p{margin-top:7px}}
 @media print{.contenedor{width:100%}.cabecera,nav,.vistas,.saltar,footer,.portada:after{display:none}.portada{padding:10px 0}h1{font-size:2.2rem}.calendario-intro{margin-bottom:15px}section{padding-top:20px}.dia{break-inside:avoid}.material{break-inside:avoid}body{font-size:10pt}*{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+
+/* The panel bounds the frozen weekday row to the calendar itself. */
+.calendario-panel{position:relative;--nav-offset:0px}
+.dias-semana{position:sticky;top:var(--nav-offset);z-index:2;background:#f2ede4;border-bottom:1px solid var(--borde)}
+.dias-semana span{padding:8px 10px}
+.dia{padding:8px 10px 10px;min-height:112px}
+.dia time{margin-bottom:6px;gap:4px}
+.detalle p{margin-top:3px;line-height:1.4}
+.detalle .anotacion{margin-top:5px;padding-left:6px}
+.agenda .dia{padding:12px 18px;gap:18px}
+.agenda .detalle p{margin-bottom:2px}
+.materiales-tabla{border:1px solid var(--borde);border-radius:4px;overflow:hidden;background:#fffdf8}
+.materiales-tabla table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left}
+.materiales-tabla th,.materiales-tabla td{padding:12px 16px;vertical-align:top;overflow-wrap:anywhere;border-bottom:1px solid var(--borde)}
+.materiales-tabla thead{background:#f2ede4}
+.materiales-tabla thead th:first-child{width:56%}
+.materiales-tabla thead th:nth-child(2){width:16%}
+.materiales-tabla tbody th[scope="row"]{font-weight:400}
+.materiales-tabla .material-grupo th{background:#eee5e2;color:var(--vino);font:400 1.35rem/1.3 Georgia,serif}
+.materiales-tabla tbody:last-child tr:last-child>*{border-bottom:0}
+.material-estado{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.875rem;font-weight:650;white-space:nowrap}
+.material-estado.pendiente{background:#f9dede;color:#8b2222}
+.material-estado.disponible{background:#dceedd;color:#245c30}
+.solo-lectores{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@media(min-width:761px) and (max-width:1100px){.dia{padding:8px 7px}.dias-semana span{padding:8px 6px}}
+@media(max-width:760px){
+  .vistas{display:flex;max-width:100%;flex-wrap:wrap}
+  .calendario-panel{overflow:auto;max-height:70vh;overscroll-behavior:contain;border-bottom:1px solid var(--borde)}
+  #ensayos:not(.agenda) .dias-semana{display:grid;min-width:770px;top:0}
+  #ensayos:not(.agenda) .calendario{display:grid;min-width:770px;border-top:1px solid var(--borde);border-left:1px solid var(--borde)}
+  #ensayos:not(.agenda) .vacio{display:block}
+  #ensayos:not(.agenda) .dia{display:block;min-height:112px;padding:8px;border:0;border-right:1px solid var(--borde);border-bottom:1px solid var(--borde);margin:0;border-radius:0}
+  #ensayos:not(.agenda) .dia time{display:flex;margin-bottom:6px}
+  #ensayos:not(.agenda) .fecha-numero{font-size:1.5rem;margin:0}
+  #ensayos:not(.agenda) .fecha-contexto{display:none}
+  #ensayos:not(.agenda) .mes-extra{display:block}
+  #ensayos:not(.agenda) .dia.adicional{border-top:3px solid var(--vino)}
+  .agenda .calendario-panel{overflow:visible;max-height:none;border:0}
+  .agenda .dia{grid-template-columns:84px minmax(0,1fr);padding:10px 12px;gap:12px;margin-bottom:5px;border-bottom:1px solid var(--borde)}
+  .agenda .dia time{display:block}
+  .agenda .fecha-numero{font-size:1.5rem;margin-bottom:3px}
+  .agenda .detalle{display:block}
+  .materiales-tabla th,.materiales-tabla td{padding:10px 8px;font-size:.875rem;line-height:1.45}
+  .materiales-tabla thead th:first-child{width:48%}
+  .materiales-tabla thead th:nth-child(2){width:23%}
+  .material-estado{padding:2px 7px}
+}
+@media print{.calendario-panel{overflow:visible;max-height:none}.dias-semana{position:static}.materiales-tabla tr{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -22,7 +70,7 @@
 <section id="ensayos" aria-labelledby="titulo-calendario">
 <div class="calendario-intro"><div><p class="sobretitulo">Ensayos</p><h2 id="titulo-calendario">Calendario de ensayos</h2><p class="mes">Noviembre de 2026</p></div><aside class="muestra-tarjeta" aria-label="Fecha de la muestra"><p class="sobretitulo">Muestra</p><strong><time datetime="2026-12-02">2 de diciembre de 2026</time></strong><p>Día de la muestra · Horario por confirmar</p></aside></div>
 <div class="barra"><ul class="leyenda" aria-label="Leyenda del calendario"><li><i class="si" aria-hidden="true"></i>Ensayo</li><li><i class="no" aria-hidden="true"></i>Sin ensayo</li><li><i class="muestra" aria-hidden="true"></i>Muestra</li><li><i class="nd" aria-hidden="true"></i>Sin información</li></ul><div class="vistas" role="group" aria-label="Vista del calendario" hidden><button type="button" data-vista="mes" aria-pressed="true" aria-controls="fechas">Vista mensual</button><button type="button" data-vista="agenda" aria-pressed="false" aria-controls="fechas">Vista de agenda</button></div></div>
-<div class="dias-semana" aria-hidden="true"><span>Lunes</span><span>Martes</span><span>Miércoles</span><span>Jueves</span><span>Viernes</span><span>Sábado</span><span>Domingo</span></div>
+<div class="calendario-panel" tabindex="0" role="region" aria-label="Calendario mensual; desplázate para consultar todas las fechas"><div class="dias-semana" aria-hidden="true"><span>Lunes</span><span>Martes</span><span>Miércoles</span><span>Jueves</span><span>Viernes</span><span>Sábado</span><span>Domingo</span></div>
 <ol class="calendario" id="fechas" aria-label="Fechas de noviembre y fechas adicionales de diciembre de 2026"><li class="vacio" aria-hidden="true"></li>
 <li class="vacio" aria-hidden="true"></li>
 <li class="vacio" aria-hidden="true"></li>
@@ -73,7 +121,7 @@
       <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia no">
       <time datetime="2026-11-15" aria-label="Domingo, 15 de noviembre de 2026"><span class="fecha-numero">15</span><span class="fecha-contexto">Domingo<span class="mes-agenda"> de noviembre</span></span></time>
-      <div class="detalle"><span class="estado">Sin ensayo</span><p class="anotacion">Anotación: 2–4; por confirmar</p></div></li>
+      <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia si">
       <time datetime="2026-11-16" aria-label="Lunes, 16 de noviembre de 2026"><span class="fecha-numero">16</span><span class="fecha-contexto">Lunes<span class="mes-agenda"> de noviembre</span></span></time>
       <div class="detalle"><span class="estado">Ensayo</span><p class="evento">Mujer</p><p class="hora">Horario por confirmar</p></div></li>
@@ -88,13 +136,13 @@
       <div class="detalle"><span class="estado">Ensayo</span><p class="hora">Horario por confirmar</p><p class="anotacion">Todos menos Oli</p></div></li>
 <li class="dia no">
       <time datetime="2026-11-20" aria-label="Viernes, 20 de noviembre de 2026"><span class="fecha-numero">20</span><span class="fecha-contexto">Viernes<span class="mes-agenda"> de noviembre</span></span></time>
-      <div class="detalle"><span class="estado">Sin ensayo</span><p class="evento">Hamlet</p><p class="hora">6:00 p. m. a 8:00 p. m.</p><p class="anotacion">Información contradictoria; por confirmar</p></div></li>
+      <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia no">
       <time datetime="2026-11-21" aria-label="Sábado, 21 de noviembre de 2026"><span class="fecha-numero">21</span><span class="fecha-contexto">Sábado<span class="mes-agenda"> de noviembre</span></span></time>
       <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia no">
       <time datetime="2026-11-22" aria-label="Domingo, 22 de noviembre de 2026"><span class="fecha-numero">22</span><span class="fecha-contexto">Domingo<span class="mes-agenda"> de noviembre</span></span></time>
-      <div class="detalle"><span class="estado">Sin ensayo</span><p class="evento">Pasón</p><p class="hora">9:00 a. m. a 4:00 p. m.</p><p class="anotacion">Información contradictoria; por confirmar</p></div></li>
+      <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia si">
       <time datetime="2026-11-23" aria-label="Lunes, 23 de noviembre de 2026"><span class="fecha-numero">23</span><span class="fecha-contexto">Lunes<span class="mes-agenda"> de noviembre</span></span></time>
       <div class="detalle"><span class="estado">Ensayo</span><p class="evento">Hamlet</p><p class="hora">6:00 p. m. a 8:00 p. m.</p></div></li>
@@ -115,7 +163,7 @@
       <div class="detalle"><span class="estado">Ensayo</span><p class="evento">Pasón</p><p class="hora">9:00 a. m. a 4:00 p. m.</p></div></li>
 <li class="dia no">
       <time datetime="2026-11-29" aria-label="Domingo, 29 de noviembre de 2026"><span class="fecha-numero">29</span><span class="fecha-contexto">Domingo<span class="mes-agenda"> de noviembre</span></span></time>
-      <div class="detalle"><span class="estado">Sin ensayo</span><p class="evento">Pasón</p><p class="hora">9:00 a. m. a 4:00 p. m.</p><p class="anotacion">Información contradictoria; por confirmar</p></div></li>
+      <div class="detalle"><span class="estado">Sin ensayo</span></div></li>
 <li class="dia si">
       <time datetime="2026-11-30" aria-label="Lunes, 30 de noviembre de 2026"><span class="fecha-numero">30</span><span class="fecha-contexto">Lunes<span class="mes-agenda"> de noviembre</span></span></time>
       <div class="detalle"><span class="estado">Ensayo</span><p class="evento">Pasón</p><p class="hora">6:00 p. m. a 8:00 p. m.</p></div></li>
@@ -128,10 +176,38 @@
 <li class="vacio" aria-hidden="true"></li>
 <li class="vacio" aria-hidden="true"></li>
 <li class="vacio" aria-hidden="true"></li>
-<li class="vacio" aria-hidden="true"></li></ol>
+<li class="vacio" aria-hidden="true"></li></ol></div>
 <p class="nota">Los horarios y las anotaciones señalados están pendientes de confirmación.</p>
 </section>
-<section id="materiales" class="materiales" aria-labelledby="titulo-materiales"><p class="sobretitulo">Materiales</p><h2 id="titulo-materiales">Materiales para Tres traumas treintañeros</h2><div class="materiales-grid"><article class="material transversal"><h3>Transversal</h3><ul><li>Ropa negra neutra y unificada para todos. Traer propuesta el miércoles.</li></ul></article><article class="material "><h3>Guerra</h3><ul><li>Sombrero para el general Esteban.</li><li>Sombrero para la generala Aura.</li><li>Sombrero para el general Nico.</li><li>Sombrero para la soldada Oli.</li><li>Bota o recipiente para el trago.</li><li>Un tratado resistente al abuso.</li><li>3 gafas negras.</li><li>3 sombrillas.</li><li>Tabla y ruedas para poner ratones.</li><li>Trampa para ratones.</li><li>Cuerda.</li></ul></article><article class="material "><h3>Mujer</h3><ul><li>Tubos de PVC para construir el rifle.</li><li>Mallas.</li><li>Bolsa plástica de supermercado.</li><li>2 moñas (por pensar).</li></ul></article><article class="material "><h3>Ser o no ser</h3><ul><li>Tubos de PVC para construir la estructura del espejo.</li><li>2 cuellos de lechugilla elegantes.</li><li>Luces navideñas.</li><li>Tela para tapar el armatoste.</li></ul></article></div></section>
+<section id="materiales" class="materiales" aria-labelledby="titulo-materiales"><p class="sobretitulo">Materiales</p><h2 id="titulo-materiales">Materiales para Tres traumas treintañeros</h2><div class="materiales-tabla"><table><caption class="solo-lectores">Materiales por escena, estado de disponibilidad y detalles</caption><thead><tr><th scope="col">Material</th><th scope="col">Estado</th><th scope="col">Detalles</th></tr></thead><tbody><tr class="material-grupo"><th colspan="3" scope="rowgroup">Transversal</th></tr>
+<tr><th scope="row">Ropa negra neutra y unificada para todos. Traer propuesta el miércoles.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+</tbody>
+<tbody><tr class="material-grupo"><th colspan="3" scope="rowgroup">Guerra</th></tr>
+<tr><th scope="row">Sombrero para el general Esteban.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Sombrero para la generala Aura.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Sombrero para el general Nico.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Sombrero para la soldada Oli.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Bota o recipiente para el trago.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Un tratado resistente al abuso.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">3 gafas negras.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">3 sombrillas.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Tabla y ruedas para poner ratones.</th><td><span class="material-estado disponible">Está</span></td><td>Comprado 40.000 COP.</td></tr>
+<tr><th scope="row">Trampa para ratones.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Cuerda.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Cubiertos para hacer sonido.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+</tbody>
+<tbody><tr class="material-grupo"><th colspan="3" scope="rowgroup">Mujer</th></tr>
+<tr><th scope="row">Tubos de PVC para construir el rifle.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Mallas.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Bolsa plástica de supermercado.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">2 moñas (por pensar).</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+</tbody>
+<tbody><tr class="material-grupo"><th colspan="3" scope="rowgroup">Ser o no ser</th></tr>
+<tr><th scope="row">Tubos de PVC para construir la estructura del espejo.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">2 cuellos de lechugilla elegantes.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Luces navideñas.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+<tr><th scope="row">Tela para tapar el armatoste.</th><td><span class="material-estado pendiente">Falta</span></td><td></td></tr>
+</tbody></table></div></section>
 </main>
 <footer><div class="contenedor"><p>Teatro de Subida</p><p>Tres traumas treintañeros · Noviembre de 2026</p></div></footer>
 <script>
@@ -139,14 +215,22 @@
   const section = document.getElementById('ensayos');
   const controls = section.querySelector('.vistas');
   const buttons = [...controls.querySelectorAll('button')];
-  const mobile = window.matchMedia('(max-width: 760px)');
   controls.hidden = false;
   function setView(view) {
-    section.classList.toggle('agenda', view === 'agenda' && !mobile.matches);
+    section.classList.toggle('agenda', view === 'agenda');
     buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.vista === view)));
   }
   buttons.forEach(button => button.addEventListener('click', () => setView(button.dataset.vista)));
-  mobile.addEventListener('change', () => setView('mes'));
+  // Keep the active view when rotating or resizing the screen.
+  function updateNavigationOffset() {
+    const navigation = document.querySelector('.cabecera');
+    const position = getComputedStyle(navigation).position;
+    const offset = ['fixed', 'sticky'].includes(position) ? navigation.getBoundingClientRect().bottom : 0;
+    section.querySelector('.calendario-panel').style.setProperty('--nav-offset', `${Math.max(0, offset)}px`);
+  }
+  new ResizeObserver(updateNavigationOffset).observe(document.querySelector('.cabecera'));
+  window.addEventListener('resize', updateNavigationOffset);
+  updateNavigationOffset();
 })();
 </script>
 </body>
